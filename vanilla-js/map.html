@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Display MAPID Maps in 3D</title>
+    <meta
+      property="og:description"
+      content="Use extrusions to display buildings' height in 3D."
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css"
+    />
+    <script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const MAPTILER_KEY = "67acaad1aeee190e01e20459";
+      const map = new maplibregl.Map({
+        style: `https://basemap.mapid.io/styles/street-new-generation/style.json?key=${MAPTILER_KEY}`,
+        center: [106.82717425766694, -6.175403054116954],
+        zoom: 15.5,
+        pitch: 60,
+        bearing: 0,
+        container: "map",
+        canvasContextAttributes: { antialias: true },
+      });
+
+      // The 'building' layer in the streets vector source contains building-height
+      // data from OpenStreetMap.
+      map.on("load", () => {
+        console.log("map loaded");
+      });
+    </script>
+  </body>
+</html>
