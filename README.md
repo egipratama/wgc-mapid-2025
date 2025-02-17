@@ -2,6 +2,8 @@
 
 Selamat datang di MAPID Web GIS Competition! 🎉 Dalam kompetisi ini, peserta akan menggunakan MAPID Maps sebagai platform utama untuk mengembangkan aplikasi Web GIS. Berikut adalah panduan langkah demi langkah untuk memulai.
 
+## 🌍 Apa itu MAPID MAPS
+
 ## 🛠 Pendaftaran dan Akses Akun
 1. **Daftar** melalui tautan berikut: [https://geo.mapid.io/register](https://geo.mapid.io/register).  
 2. **Hubungi panitia** untuk mendapatkan lisensi dan akses ke map service di dashboard GEO MAPID.  
@@ -12,3 +14,7 @@ Selamat datang di MAPID Web GIS Competition! 🎉 Dalam kompetisi ini, peserta a
 
 - **Untuk contoh penggunaan MAPID MAPS dengan Vanilla JavaScript,** klik [disini](/vanilla-js/README.md).  
 - **Untuk contoh penggunaan MAPID MAPS dengan React JS,** klik [disini](/react-js/README.md).
+
+## 🗂 Referensi Dokumentasi Lain
+- [MapLibre gl](https://maplibre.org/maplibre-gl-js/docs/)
+- [MapLibre gl Github](https://github.com/maplibre/maplibre-gl-js) 
