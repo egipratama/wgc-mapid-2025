@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Display MAPID Maps in 3D</title>
+    <title>Navigator in MAPID Maps</title>
     <meta
       property="og:description"
       content="Use extrusions to display buildings' height in 3D."
@@ -39,6 +39,16 @@
         canvasContextAttributes: { antialias: true },
         attributionControl: true, // attribution control wajib ada sebagai syarat penggunaan mapid maps
       });
+
+      // Tambahkan Navigation Control (Zoom +, -, dan Kompas)
+      var nav = new maplibregl.NavigationControl({
+        showCompass: true, // Menampilkan kompas
+        showZoom: true, // Menampilkan tombol zoom (+, -)
+        visualizePitch: true, // Memvisualisasikan sudut kemiringan (pitch)
+        visualizeRoll: true, // Memvisualisasikan perputaran (roll)
+      });
+
+      map.addControl(nav, "top-right"); // Menempatkan kontrol di kanan atas
 
       map.on("load", () => {
         console.log("map loaded");
