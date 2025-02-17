@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Display Points in MAPID Maps</title>
+    <meta
+      property="og:description"
+      content="Use extrusions to display buildings' height in 3D."
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css"
+    />
+    <script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const MAP_SERVICE_KEY = "67acaad1aeee190e01e20459"; // ganti dengan API key Anda yang didapat dari menu map services di geo.mapid.io
+      const map = new maplibregl.Map({
+        style: `https://basemap.mapid.io/styles/street-new-generation/style.json?key=${MAP_SERVICE_KEY}`,
+        center: [107.6117887556604, -6.918605247117273],
+        zoom: 12,
+        pitch: 0,
+        bearing: 0,
+        container: "map",
+        canvasContextAttributes: { antialias: true },
+        attributionControl: true, // attribution control wajib ada sebagai syarat penggunaan mapid maps
+      });
+
+      // GeoJSON data dengan beberapa titik
+      var geojsonData = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [107.60981, -6.91474], // Titik 1
+            },
+            properties: {
+              title: "Lokasi A",
+            },
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [107.61861, -6.90274], // Titik 2
+            },
+            properties: {
+              title: "Lokasi B",
+            },
+          },
+        ],
+      };
+
+      map.on("load", () => {
+        console.log("map loaded");
+
+        map.addSource("points", {
+          type: "geojson",
+          data: geojsonData,
+        });
+
+        // Tambahkan layer untuk menampilkan titik
+        map.addLayer({
+          id: "points-layer",
+          type: "circle",
+          source: "points",
+          paint: {
+            "circle-radius": 8, // Ukuran titik
+            "circle-color": "#ff0000", // Warna merah
+          },
+        });
+
+        // Event klik pada titik untuk menampilkan popup
+        map.on("click", "points-layer", function (e) {
+          var coordinates = e.features[0].geometry.coordinates.slice();
+          var title = e.features[0].properties.title;
+
+          new maplibregl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(`<b>${title}</b>`)
+            .addTo(map);
+        });
+
+        // Ubah cursor saat mengarah ke titik
+        map.on("mouseenter", "points-layer", function () {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", "points-layer", function () {
+          map.getCanvas().style.cursor = "";
+        });
+      });
+    </script>
+  </body>
+</html>
