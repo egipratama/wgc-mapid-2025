@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Display LineString in MAPID Maps</title>
+    <meta
+      property="og:description"
+      content="Use extrusions to display buildings' height in 3D."
+    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css"
+    />
+    <script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const MAP_SERVICE_KEY = "67acaad1aeee190e01e20459"; // ganti dengan API key Anda yang didapat dari menu map services di geo.mapid.io
+      const map = new maplibregl.Map({
+        style: `https://basemap.mapid.io/styles/street-new-generation/style.json?key=${MAP_SERVICE_KEY}`,
+        center: [107.6117887556604, -6.918605247117273],
+        zoom: 12,
+        pitch: 0,
+        bearing: 0,
+        container: "map",
+        canvasContextAttributes: { antialias: true },
+        attributionControl: true, // attribution control wajib ada sebagai syarat penggunaan mapid maps
+      });
+
+      var geojsonLine = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "LineString",
+              coordinates: [
+                [107.60981, -6.91474], // Titik awal garis
+                [107.62081, -6.91574], // Titik kedua
+                [107.63081, -6.92074], // Titik akhir
+              ],
+            },
+            properties: {
+              name: "Rute Contoh",
+            },
+          },
+        ],
+      };
+
+      map.on("load", function () {
+        // Tambahkan GeoJSON sebagai sumber data
+        map.addSource("line-source", {
+          type: "geojson",
+          data: geojsonLine,
+        });
+
+        // Tambahkan layer untuk menampilkan garis
+        map.addLayer({
+          id: "line-layer",
+          type: "line",
+          source: "line-source",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#ff0000", // Warna merah
+            "line-width": 4, // Ketebalan garis
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
