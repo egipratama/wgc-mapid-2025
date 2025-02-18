@@ -3,6 +3,7 @@ import Map from "./Pages/Maps";
 import Navigator from "./pages/Navigator";
 import Marker from "./Pages/Marker";
 import Points from "./Pages/Points";
+import Line from "./Pages/Line";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path="/navigator" element={<Navigator />} />
       <Route path="/marker" element={<Marker />} />
       <Route path="/points" element={<Points />} />
+      <Route path="/line" element={<Line />} />
     </Routes>
   );
 }
