@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-function Maps() {
+function Points() {
   const MAP_SERVICE_KEY = import.meta.env.VITE_MAP_SERVICE_KEY;
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -83,4 +83,4 @@ function Maps() {
   return <div ref={mapContainer} style={{ width: "100%", height: "100vh" }} />;
 }
 
-export default Maps;
+export default Points;
