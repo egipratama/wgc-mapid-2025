@@ -16,22 +16,24 @@ function Marker() {
       zoom: 15.5,
       pitch: 60,
     });
-    console.log("map loaded");
 
-    const popup = new maplibregl.Popup({ offset: 25 }).setText("Ini Popup!");
+    map.current.on("load", () => {
+      console.log("map loaded");
+      const popup = new maplibregl.Popup({ offset: 25 }).setText("Ini Popup!");
 
-    var marker = new maplibregl.Marker({
-      color: "red", // Warna marker
-      draggable: true, // Marker bisa dipindahkan
-    })
-      .setLngLat([106.82717425766694, -6.175403054116954]) // Koordinat marker [lng, lat]
-      .setPopup(popup) // Tambahkan popup
-      .addTo(map.current);
+      var marker = new maplibregl.Marker({
+        color: "red", // Warna marker
+        draggable: true, // Marker bisa dipindahkan
+      })
+        .setLngLat([106.82717425766694, -6.175403054116954]) // Koordinat marker [lng, lat]
+        .setPopup(popup) // Tambahkan popup
+        .addTo(map.current);
 
-    // Event listener untuk mendapatkan koordinat saat marker dipindahkan
-    marker.on("dragend", function () {
-      var lngLat = marker.getLngLat();
-      console.log("Marker baru di:", lngLat.lng, lngLat.lat);
+      // Event listener untuk mendapatkan koordinat saat marker dipindahkan
+      marker.on("dragend", function () {
+        var lngLat = marker.getLngLat();
+        console.log("Marker baru di:", lngLat.lng, lngLat.lat);
+      });
     });
 
     return () => map.current?.remove(); // Hapus peta saat komponen unmount

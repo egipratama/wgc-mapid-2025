@@ -16,16 +16,18 @@ function Navigator() {
       zoom: 15.5,
       pitch: 60,
     });
-    console.log("map loaded");
 
-    // Tambahkan Navigator Control
-    const nav = new maplibregl.NavigationControl({
-      showCompass: true, // Menampilkan kompas
-      showZoom: true, // Menampilkan tombol zoom (+, -)
-      visualizePitch: true, // Memvisualisasikan sudut kemiringan (pitch)
-      visualizeRoll: true, // Memvisualisasikan perputaran (roll)
+    map.current.on("load", () => {
+      console.log("map loaded");
+      // Tambahkan Navigator Control
+      const nav = new maplibregl.NavigationControl({
+        showCompass: true, // Menampilkan kompas
+        showZoom: true, // Menampilkan tombol zoom (+, -)
+        visualizePitch: true, // Memvisualisasikan sudut kemiringan (pitch)
+        visualizeRoll: true, // Memvisualisasikan perputaran (roll)
+      });
+      map.current.addControl(nav, "top-right"); // Menempatkan di kanan atas
     });
-    map.current.addControl(nav, "top-right"); // Menempatkan di kanan atas
 
     return () => map.current?.remove(); // Hapus peta saat komponen unmount
   }, []);

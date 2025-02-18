@@ -16,7 +16,10 @@ function Maps() {
       zoom: 15.5,
       pitch: 60,
     });
-    console.log("map loaded");
+    
+    map.current.on("load", () => {
+      console.log("map loaded");
+    })
 
     return () => map.current?.remove(); // Hapus peta saat komponen unmount
   }, []);
