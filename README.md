@@ -20,14 +20,6 @@ Style default yang dapat peserta gunakan
 ```shell
 https://basemap.mapid.io/styles/street-new-generation/style.json?key=${MAP_SERVICE_KEY}
 ```
-#### TileJSON
-```shell
-https://basemap.mapid.io/styles/512/street-new-generation.json?key=${MAP_SERVICE_KEY}
-```
-#### WMTS
-```shell
-https://basemap.mapid.io/styles/street-new-generation/wmts.xml?key=${MAP_SERVICE_KEY}
-```
 Klik [disini](/MAPSTYLE.md) untuk melihat tutorial cara memilih map style lain.
 
 ## 🗂 Repository ini berfungsi sebagai referensi bagi peserta dalam pembuatan Web GIS menggunakan MAPID MAPS.  
